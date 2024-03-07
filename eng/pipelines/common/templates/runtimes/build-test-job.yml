@@ -1,18 +1,48 @@
 parameters:
-  buildConfig: ''
-  archType: ''
-  osGroup: ''
-  osSubgroup: ''
-  container: ''
-  testGroup: ''
-  displayNameArgs: ''
-  condition: true
-  variables: {}
-  pool: ''
-  runtimeFlavor: 'coreclr'
-  runtimeVariant: ''
-  dependsOn: []
-  crossBuild: false
+- name: buildConfig
+  type: string
+  default: ''
+- name: archType
+  type: string
+  default: ''
+- name: osGroup
+  type: string
+  default: ''
+- name: osSubgroup
+  type: string
+  default: ''
+- name: container
+  type: string
+  default: ''
+- name: testGroup
+  type: string
+  default: ''
+- name: displayNameArgs
+  type: string
+  default: ''
+- name: condition
+  type: boolean
+  default: true
+- name: variables
+  type: object
+  default: {}
+- name: pool
+  type: string
+  default: ''
+- name: runtimeFlavor
+  type: string
+  default: 'coreclr'
+- name: runtimeVariant
+  type: string
+  default: ''
+- name: dependsOn
+  type: array
+  default: []
+- name: crossBuild
+  type: boolean
+  default: false
+- name: isOfficial
+  type: boolean
 
 ### Build managed test components (native components are getting built as part
 ### of the product build job).
@@ -137,12 +167,13 @@ jobs:
         artifactName: $(microsoftNetSdkIlArtifactName)
         displayName: 'Microsoft.NET.Sdk.IL package'
 
-
     # Publish Logs
-    - task: PublishPipelineArtifact@1
-      displayName: Publish Logs
-      inputs:
-        targetPath: $(Build.SourcesDirectory)/artifacts/log
-        artifactName: '${{ parameters.runtimeFlavor }}_Common_Runtime_TestBuildLogs_Attempt$(System.JobAttempt)_AnyOS_AnyCPU_$(buildConfig)_${{ parameters.testGroup }}'
-      continueOnError: true
-      condition: always()
+    - template: /eng/pipelines/common/templates/publish-pipeline-artifacts.yml
+      parameters:
+        displayName: Publish Logs
+        isOfficial: ${{ parameters.isOfficial }}
+        inputs:
+          targetPath: $(Build.SourcesDirectory)/artifacts/log
+          ArtifactName: '${{ parameters.runtimeFlavor }}_Common_Runtime_TestBuildLogs_Attempt$(System.JobAttempt)_AnyOS_AnyCPU_$(buildConfig)_${{ parameters.testGroup }}'
+          continueOnError: true
+          condition: always()

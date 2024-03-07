@@ -1,12 +1,30 @@
 parameters:
-  rootFolder: ''
-  includeRootFolder: false
-  archiveType: ''
-  tarCompression: ''
-  archiveExtension: ''
-  artifactName: ''
-  displayName: ''
-  condition: succeeded()
+- name: isOfficialBuild
+  type: boolean
+- name: rootFolder
+  type: string
+  default: ''
+- name: includeRootFolder
+  type: boolean
+  default: false
+- name: archiveType
+  type: string
+  default: ''
+- name: tarCompression
+  type: string
+  default: ''
+- name: archiveExtension
+  type: string
+  default: ''
+- name: artifactName
+  type: string
+  default: ''
+- name: displayName
+  type: string
+  default: ''
+- name: condition
+  type: boolean
+  default: succeeded()
 
 steps:
   # Zip Artifact
@@ -20,9 +38,11 @@ steps:
       includeRootFolder: ${{ parameters.includeRootFolder }}
     condition: ${{ parameters.condition }}
 
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish ${{ parameters.displayName }}'
-    inputs:
-      pathtoPublish: $(Build.StagingDirectory)/${{ parameters.artifactName }}${{ parameters.archiveExtension }}
-      artifactName:  ${{ parameters.artifactName }}
-    condition: ${{ parameters.condition }}
+  - template: /eng/pipelines/common/templates/publish-build-artifacts.yml
+    parameters:
+      isOfficial: ${{ parameters.isOfficialBuild }}
+      displayName: 'Publish ${{ parameters.displayName }}'
+      inputs:
+        PathtoPublish: $(Build.StagingDirectory)/${{ parameters.artifactName }}${{ parameters.archiveExtension }}
+        artifactName:  ${{ parameters.artifactName }}
+      condition: ${{ parameters.condition }}

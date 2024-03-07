@@ -16,6 +16,7 @@ parameters:
 jobs:
 - template: /eng/pipelines/common/templates/runtimes/xplat-job.yml
   parameters:
+    templatePath: 'templates-official'
     archType: ${{ parameters.archType }}
     buildConfig: ${{ parameters.buildConfig }}
     container: ${{ parameters.container }}
@@ -99,7 +100,7 @@ jobs:
         name: workloads
 
     # Publish Logs
-    - task: PublishPipelineArtifact@1
+    - task: 1ES.PublishPipelineArtifact@1
       displayName: Publish Logs
       inputs:
         targetPath: $(Build.SourcesDirectory)/artifacts/log

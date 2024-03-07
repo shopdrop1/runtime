@@ -14,6 +14,7 @@ parameters:
 jobs:
 - template: /eng/pipelines/common/templates/runtimes/xplat-job.yml
   parameters:
+    templatePath: 'templates-official'
     buildConfig: ${{ parameters.buildConfig }}
     osGroup: ${{ parameters.osGroup }}
     osSubGroup: ${{ parameters.osSubGroup }}
@@ -75,14 +76,14 @@ jobs:
         contents: '**/offsets-*.h'
         targetFolder: '$(Build.SourcesDirectory)/artifacts/obj/mono/offsetfiles/'
 
-    - task: PublishPipelineArtifact@1
+    - task: 1ES.PublishPipelineArtifact@1
       displayName: Upload offset files
       inputs:
         targetPath: '$(Build.SourcesDirectory)/artifacts/obj/mono/offsetfiles'
         artifactName: 'Mono_Offsets_$(osGroup)$(osSubGroup)'
 
     # Publish Logs
-    - task: PublishPipelineArtifact@1
+    - task: 1ES.PublishPipelineArtifact@1
       displayName: Publish Logs
       inputs:
         targetPath: $(Build.SourcesDirectory)/artifacts/log

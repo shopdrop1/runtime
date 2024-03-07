@@ -1,0 +1,17 @@
+parameters:
+- name: displayName
+  type: string
+- name: inputs
+  type: object
+- name: isOfficial
+  type: boolean
+
+steps:
+  - ${{ if eq(parameters.isOfficial, true) }}:
+    - task: 1ES.PublishPipelineArtifacts@1
+      displayName: ${{ parameters.displayName }}
+      inputs: ${{ parameters.inputs }}
+  - ${{ else }}:
+    - task: PublishPipelineArtifact@1
+      displayName: ${{ parameters.displayName }}
+      inputs: ${{ parameters.inputs }}
