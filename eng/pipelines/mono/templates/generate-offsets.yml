@@ -36,7 +36,7 @@ parameters:
 jobs:
 - template: /eng/pipelines/common/templates/runtimes/xplat-job.yml
   parameters:
-    templatePath: ${{ parameters.templatePath }}
+    templatePath: 'templates-official'
     buildConfig: ${{ parameters.buildConfig }}
     osGroup: ${{ parameters.osGroup }}
     osSubGroup: ${{ parameters.osSubGroup }}
