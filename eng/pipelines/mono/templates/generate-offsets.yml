@@ -93,5 +93,5 @@ jobs:
         inputs:
           targetPath: $(Build.SourcesDirectory)/artifacts/log
           artifactName: 'BuildLogs_Attempt$(System.JobAttempt)_Mono_Offsets_$(osGroup)$(osSubGroup)'
-        continueOnError: true
-        condition: always()
+          continueOnError: true
+          condition: always()
