@@ -275,7 +275,7 @@ jobs:
 
     - template: /eng/pipelines/common/templates/publish-build-artifacts.yml
       parameters:
-        isOfficial: ${{ parameters.isOfficialBuild }}
+        isOfficialBuild: ${{ parameters.isOfficialBuild }}
         displayName: Publish Logs
         inputs:
           PathtoPublish: '$(Build.SourcesDirectory)/artifacts/log/'

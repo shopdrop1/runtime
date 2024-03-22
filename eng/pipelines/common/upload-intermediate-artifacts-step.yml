@@ -27,7 +27,7 @@ steps:
 
 - template: /eng/pipelines/common/templates/publish-build-artifacts.yml
   parameters:
-    isOfficial: true
+    isOfficialBuild: true
     displayName: Publish intermediate artifacts
     inputs:
       PathtoPublish: '$(Build.StagingDirectory)/IntermediateArtifacts'

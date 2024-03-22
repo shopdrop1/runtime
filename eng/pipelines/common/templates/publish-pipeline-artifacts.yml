@@ -3,7 +3,7 @@ parameters:
   type: string
 - name: inputs
   type: object
-- name: isOfficial
+- name: isOfficialBuild
   type: boolean
 
 steps:

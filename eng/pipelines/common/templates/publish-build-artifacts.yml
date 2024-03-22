@@ -1,5 +1,5 @@
 parameters:
-  - name: isOfficial
+  - name: isOfficialBuild
     type: boolean
   - name: displayName
     type: string
@@ -10,7 +10,7 @@ parameters:
     default: ''
 
 steps:
-  - ${{ if eq(parameters.isOfficial, 'true') }}:
+  - ${{ if parameters.isOfficialBuild }}:
     - task: 1ES.PublishBuildArtifacts@1
       displayName: ${{ parameters.displayName }}
       inputs: ${{ parameters.inputs }}

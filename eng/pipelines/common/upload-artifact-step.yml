@@ -40,7 +40,7 @@ steps:
 
   - template: /eng/pipelines/common/templates/publish-build-artifacts.yml
     parameters:
-      isOfficial: ${{ parameters.isOfficialBuild }}
+      isOfficialBuild: ${{ parameters.isOfficialBuild }}
       displayName: 'Publish ${{ parameters.displayName }}'
       inputs:
         PathtoPublish: $(Build.StagingDirectory)/${{ parameters.artifactName }}${{ parameters.archiveExtension }}

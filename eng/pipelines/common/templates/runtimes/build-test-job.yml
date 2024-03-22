@@ -41,7 +41,7 @@ parameters:
 - name: crossBuild
   type: boolean
   default: false
-- name: isOfficial
+- name: isOfficialBuild
   type: boolean
 
 ### Build managed test components (native components are getting built as part
@@ -171,7 +171,7 @@ jobs:
     - template: /eng/pipelines/common/templates/publish-pipeline-artifacts.yml
       parameters:
         displayName: Publish Logs
-        isOfficial: ${{ parameters.isOfficial }}
+        isOfficialBuild: ${{ parameters.isOfficialBuild }}
         inputs:
           targetPath: $(Build.SourcesDirectory)/artifacts/log
           ArtifactName: '${{ parameters.runtimeFlavor }}_Common_Runtime_TestBuildLogs_Attempt$(System.JobAttempt)_AnyOS_AnyCPU_$(buildConfig)_${{ parameters.testGroup }}'
