@@ -12,6 +12,6 @@ steps:
       displayName: ${{ parameters.displayName }}
       inputs: ${{ parameters.inputs }}
   - ${{ else }}:
-    - task: PublishPipelineArtifact@1
+    - task: 1ES.PublishPipelineArtifact@1
       displayName: ${{ parameters.displayName }}
       inputs: ${{ parameters.inputs }}
