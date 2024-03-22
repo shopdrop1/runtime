@@ -86,12 +86,10 @@ jobs:
           artifactName: 'Mono_Offsets_$(osGroup)$(osSubGroup)'
 
     # Publish Logs
-    - template: /eng/pipelines/common/templates/publish-pipeline-artifacts.yml
-      parameters:
-        isOfficialBuild: ${{ parameters.isOfficialBuild }}
-        displayName: Publish Logs
-        inputs:
-          targetPath: $(Build.SourcesDirectory)/artifacts/log
-          artifactName: 'BuildLogs_Attempt$(System.JobAttempt)_Mono_Offsets_$(osGroup)$(osSubGroup)'
-          continueOnError: true
-          condition: always()
+    - task: 1ES.PublishPipelineArtifact@1
+      displayName: Publish Logs
+      inputs:
+        targetPath: $(Build.SourcesDirectory)/artifacts/log
+        artifactName: 'BuildLogs_Attempt$(System.JobAttempt)_Mono_Offsets_$(osGroup)$(osSubGroup)'
+      continueOnError: true
+      condition: always()
