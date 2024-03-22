@@ -1,34 +1,14 @@
 parameters:
-- name: buildConfig
-  type: string
-  default: 'Debug'
-- name: osGroup
-  type: string
-  default: ''
-- name: osSubGroup
-  type: string
-  default: ''
-- name: platform
-  type: string
-  default: ''
-- name: container
-  type: string
-  default: ''
-- name: timeoutInMinutes
-  type: string
-  default: ''
-- name: variables
-  type: object
-  default: {}
-- name: pool
-  type: string
-  default: ''
-- name: condition
-  type: boolean
-  default: true
-- name: isOfficialBuild
-  type: boolean
-  default: false
+  buildConfig: 'Debug'
+  osGroup: ''
+  osSubGroup: ''
+  platform: ''
+  container: ''
+  timeoutInMinutes: ''
+  variables: {}
+  pool: ''
+  condition: true
+  isOfficialBuild: false
 
 ### Product build
 jobs:
@@ -42,6 +22,7 @@ jobs:
     enableMicrobuild: true
     pool: ${{ parameters.pool }}
     condition: ${{ parameters.condition }}
+    dependOnEvaluatePaths: ${{ parameters.dependOnEvaluatePaths }}
 
     # Compute job name from template parameters
     name: ${{ format('mono_{0}{1}_offsets', parameters.osGroup, parameters.osSubGroup) }}
@@ -96,21 +77,17 @@ jobs:
         contents: '**/offsets-*.h'
         targetFolder: '$(Build.SourcesDirectory)/artifacts/obj/mono/offsetfiles/'
 
-    - template: /eng/pipelines/common/templates/publish-pipeline-artifacts.yml
-      parameters:
-        displayName: Upload offset files
-        isOfficialBuild: ${{ parameters.isOfficialBuild }}
-        inputs:
-          targetPath: '$(Build.SourcesDirectory)/artifacts/obj/mono/offsetfiles'
-          artifactName: 'Mono_Offsets_$(osGroup)$(osSubGroup)'
+    - task: 1ES.PublishPipelineArtifact@1
+      displayName: Upload offset files
+      inputs:
+        targetPath: '$(Build.SourcesDirectory)/artifacts/obj/mono/offsetfiles'
+        artifactName: 'Mono_Offsets_$(osGroup)$(osSubGroup)'
 
     # Publish Logs
-    - template: /eng/pipelines/common/templates/publish-pipeline-artifacts.yml
-      parameters:
-        displayName: Publish Logs
-        isOfficialBuild: ${{ parameters.isOfficialBuild }}
-        inputs:
-          targetPath: $(Build.SourcesDirectory)/artifacts/log
-          artifactName: 'BuildLogs_Attempt$(System.JobAttempt)_Mono_Offsets_$(osGroup)$(osSubGroup)'
-        continueOnError: true
-        condition: always()
+    - task: 1ES.PublishPipelineArtifact@1
+      displayName: Publish Logs
+      inputs:
+        targetPath: $(Build.SourcesDirectory)/artifacts/log
+        artifactName: 'BuildLogs_Attempt$(System.JobAttempt)_Mono_Offsets_$(osGroup)$(osSubGroup)'
+      continueOnError: true
+      condition: always()
