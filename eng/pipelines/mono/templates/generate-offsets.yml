@@ -20,7 +20,7 @@ parameters:
 - name: variables
   type: object
   default: {}
-- name: pool: ''
+- name: pool
   type: object
   default: ''
 - name: condition
