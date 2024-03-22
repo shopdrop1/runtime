@@ -29,8 +29,6 @@ parameters:
   - name: isOfficialBuild
     type: boolean
     default: false
-  - name: templatePath
-    type: string
 
 ### Product build
 jobs:
