@@ -1,14 +1,34 @@
 parameters:
-  buildConfig: 'Debug'
-  osGroup: ''
-  osSubGroup: ''
-  platform: ''
-  container: ''
-  timeoutInMinutes: ''
-  variables: {}
-  pool: ''
-  condition: true
-  isOfficialBuild: false
+  - name: buildConfig
+    type: string
+    default: 'Debug'
+  - name: osGroup
+    type: string
+    default: ''
+  - name: osSubGroup
+    type: string
+    default: ''
+  - name: platform
+    type: string
+    default: ''
+  - name: container
+    type: string
+    default: ''
+  - name: timeoutInMinutes
+    type: string
+    default: ''
+  - name: variables
+    type: object
+    default: {}
+  - name: pool
+    type: string
+    default: ''
+  - name: condition
+    type: boolean
+    default: true
+  - name: isOfficialBuild
+    type: boolean
+    default: false
 
 ### Product build
 jobs:
