@@ -88,7 +88,6 @@ jobs:
     # Publish Logs
     - template: /eng/pipelines/common/templates/publish-pipeline-artifacts.yml
       parameters:
-        displayName: Upload offset files
         isOfficialBuild: ${{ parameters.isOfficialBuild }}
         displayName: Publish Logs
         inputs:
