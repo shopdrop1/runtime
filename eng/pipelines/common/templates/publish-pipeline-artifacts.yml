@@ -7,7 +7,7 @@ parameters:
   type: boolean
 
 steps:
-  - ${{ if eq(parameters.isOfficial, true) }}:
+  - ${{ if parameters.isOfficialBuild }}:
     - task: 1ES.PublishPipelineArtifacts@1
       displayName: ${{ parameters.displayName }}
       inputs: ${{ parameters.inputs }}
