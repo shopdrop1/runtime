@@ -1,32 +1,33 @@
 parameters:
 - name: buildConfig
-  type: string
+  type: object
   default: 'Debug'
 - name: osGroup
-  type: string
+  type: object
   default: ''
 - name: osSubGroup
-  type: string
+  type: object
   default: ''
 - name: platform
-  type: string
+  type: object
   default: ''
 - name: container
-  type: string
+  type: object
   default: ''
 - name: timeoutInMinutes
-  type: string
+  type: object
   default: ''
 - name: variables
+  type: object
   default: {}
-- name: pool
-  type: string
+- name: pool: ''
+  type: object
   default: ''
 - name: condition
-  type: boolean
+  type: object
   default: true
 - name: isOfficialBuild
-  type: boolean
+  type: object
   default: false
 
 ### Product build
