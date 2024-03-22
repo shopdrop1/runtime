@@ -77,13 +77,18 @@ jobs:
         contents: '**/offsets-*.h'
         targetFolder: '$(Build.SourcesDirectory)/artifacts/obj/mono/offsetfiles/'
 
-    - template: /eng/pipelines/common/templates/publish-pipeline-artifacts.yml
-      parameters:
-        displayName: Upload offset files
-        isOfficialBuild: ${{ parameters.isOfficialBuild }}
-        inputs:
-          targetPath: '$(Build.SourcesDirectory)/artifacts/obj/mono/offsetfiles'
-          artifactName: 'Mono_Offsets_$(osGroup)$(osSubGroup)'
+    - task: 1ES.PublishPipelineArtifact@1
+      displayName: Upload offset files
+      inputs:
+        targetPath: '$(Build.SourcesDirectory)/artifacts/obj/mono/offsetfiles'
+        artifactName: 'Mono_Offsets_$(osGroup)$(osSubGroup)'
+#    - template: /eng/pipelines/common/templates/publish-pipeline-artifacts.yml
+#      parameters:
+#        displayName: Upload offset files
+#        isOfficialBuild: ${{ parameters.isOfficialBuild }}
+#        inputs:
+#          targetPath: '$(Build.SourcesDirectory)/artifacts/obj/mono/offsetfiles'
+#          artifactName: 'Mono_Offsets_$(osGroup)$(osSubGroup)'
 
     # Publish Logs
     - task: 1ES.PublishPipelineArtifact@1
