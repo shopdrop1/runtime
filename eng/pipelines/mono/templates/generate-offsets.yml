@@ -4,19 +4,19 @@ parameters:
   default: 'Debug'
 - name: osGroup
   type: object
-  default: ''
+  default: null
 - name: osSubGroup
   type: object
-  default: ''
+  default: null
 - name: platform
   type: object
-  default: ''
+  default: null
 - name: container
   type: object
-  default: ''
+  default: null
 - name: timeoutInMinutes
   type: object
-  default: ''
+  default: null
 - name: variables
   type: object
   default: {}
