@@ -9,12 +9,13 @@ parameters:
   pool: ''
   condition: true
   isOfficialBuild: false
+  templatePath: ''
 
 ### Product build
 jobs:
 - template: /eng/pipelines/common/templates/runtimes/xplat-job.yml
   parameters:
-    templatePath: 'templates-official'
+    templatePath: ${{ parameters.templatePath }}
     buildConfig: ${{ parameters.buildConfig }}
     osGroup: ${{ parameters.osGroup }}
     osSubGroup: ${{ parameters.osSubGroup }}
