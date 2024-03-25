@@ -32,7 +32,7 @@ parameters:
   enableRichCodeNavigation: false
   richCodeNavigationLanguage: 'csharp'
   disableComponentGovernance: ''
-  templatePath: ''
+  templatePath: 'templates'
 
 jobs:
 - template: /eng/common/${{ parameters.templatePath }}/job/job.yml
